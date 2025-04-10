@@ -16,9 +16,9 @@ export const useFilterActions = () => useFilterStore((state) => state.actions);
 const useFavoritesStore = create((set) => ({
   favorites: [],
   actions: {
-    addToFavorites: (petID) =>
+    addToFavorites: (pet) =>
       set((state) => ({
-        favorites: [...state.favorites, petID],
+        favorites: [...state.favorites, pet],
       })),
     removeFromFavorites: (petID) =>
       set((state) => ({

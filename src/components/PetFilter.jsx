@@ -6,8 +6,11 @@ import iconAll from "@/assets/img/All.png";
 import iconCats from "@/assets/img/Cats.png";
 import iconDogs from "@/assets/img/Dogs.png";
 import { useFilter, useFilterActions } from "@/lib/store";
+import { usePathname } from "next/navigation";
 
 export default function PetFilter({ data }) {
+  const currentPage = usePathname();
+
   const activeFilter = useFilter();
   const { setFilter } = useFilterActions();
 
@@ -16,6 +19,9 @@ export default function PetFilter({ data }) {
     { label: data[0].name, icon: iconDogs },
     { label: data[1].name, icon: iconCats },
   ];
+
+  if (currentPage === "/favorites") return;
+
   return (
     <ul className="flex gap-3 py-4 overflow-x-scroll">
       {filterList.map((type, id) => {

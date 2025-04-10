@@ -3,24 +3,26 @@
 import Link from "next/link";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { LuHouse, LuStar, LuMessageCircle, LuUser } from "react-icons/lu";
-import {} from "react-icons/io";
 import { usePathname } from "next/navigation";
 
 export function Header() {
   return (
-    <header className="flex justify-between items-center py-4">
-      <Link href="/" className="text-heading font-extrabold text-lg">
-        FamilyFriends
-      </Link>
-      <NotificationBell />
+    <header className="py-4 z-10 bg-navbar sticky top-0 backdrop-blur-2xl">
+      <nav className="flex justify-between items-center">
+        <Link href="/" className="text-heading font-extrabold text-lg">
+          FamilyFriends
+        </Link>
+        <NotificationBell />
+      </nav>
     </header>
   );
 }
 
 export function NavBar() {
   const currentSite = usePathname();
+
   return (
-    <nav className="py-4 bg-navbar sticky bottom-0 backdrop-blur-2xl">
+    <nav className="py-4 z-10 bg-navbar sticky bottom-0 backdrop-blur-2xl">
       <ul className="flex justify-evenly gap-4">
         <li>
           <Link href="/">

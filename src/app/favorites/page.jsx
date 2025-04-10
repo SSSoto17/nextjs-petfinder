@@ -1,3 +1,9 @@
+import BrowsePets from "@/components/DataWrapper";
+
 export default function Favorites() {
-  return <main>Favorites</main>;
+  return (
+    <main>
+      <BrowsePets />
+    </main>
+  );
 }

@@ -14,7 +14,16 @@ export async function getAnimals() {
     headers,
   }).then((res) => res.json());
 
-  return data;
+  return data.animals;
+}
+
+export async function getSingleAnimal(id) {
+  const data = await fetch(endpointPets + `/${id}`, {
+    method: "GET",
+    headers,
+  }).then((res) => res.json());
+
+  return data.animal;
 }
 
 export async function getAnimalTypes() {
@@ -23,5 +32,5 @@ export async function getAnimalTypes() {
     headers,
   }).then((res) => res.json());
 
-  return data;
+  return data.types;
 }

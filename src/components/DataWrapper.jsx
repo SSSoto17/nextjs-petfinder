@@ -8,8 +8,8 @@ export default async function BrowsePets() {
 
   return (
     <section>
-      <PetFilter data={filterData.types} />
-      <PetList data={petData.animals} />
+      <PetFilter data={filterData} />
+      <PetList data={petData} />
     </section>
   );
 }
