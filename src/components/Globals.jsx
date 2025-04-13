@@ -99,7 +99,7 @@ export function PetNavBar({ data }) {
         pathname !== "/" ? "p-6" : "p-4"
       } flex justify-between items-center absolute top-0 right-0 left-0`}
     >
-      {pathname !== "/" && (
+      {pathname.includes("single") && (
         <LuChevronLeft
           size={32}
           className="bg-white rounded-full p-1 cursor-pointer hover:scale-105 transition-all duration-75 z-10"
@@ -107,7 +107,7 @@ export function PetNavBar({ data }) {
         />
       )}
       <FavoriteButton
-        iconSize={pathname !== "/" ? 32 : 24}
+        iconSize={pathname.includes("single") ? 32 : 24}
         data={data}
         isFavorite={favorites.find((fav) => fav.id === data.id)}
       />

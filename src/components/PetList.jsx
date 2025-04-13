@@ -1,7 +1,9 @@
 "use client";
 
 import { useFavorites, useFilter } from "@/lib/store";
-import { FavoriteButton, PetNavBar } from "./Globals";
+import { PetNavBar } from "./Globals";
+
+import { LuStar } from "react-icons/lu";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -18,6 +20,14 @@ export default function PetList({ data }) {
       : data.filter((pet) => pet.type === activeFilter);
 
   const pets = !data ? favorites : filteredData;
+
+  if (!data && favorites.length === 0)
+    return (
+      <header className="flex items-center gap-4 h-full justify-center cursor-default">
+        <p className="text-lg text-inactive">No favorites yet</p>
+        <LuStar size={24} className="stroke-accent fill-accent" />
+      </header>
+    );
 
   return (
     <ul className="grid grid-cols-2 gap-4 py-4">
