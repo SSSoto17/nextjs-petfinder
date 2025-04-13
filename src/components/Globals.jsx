@@ -2,8 +2,15 @@
 
 import Link from "next/link";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { LuHouse, LuStar, LuMessageCircle, LuUser } from "react-icons/lu";
-import { usePathname } from "next/navigation";
+import {
+  LuHouse,
+  LuStar,
+  LuMessageCircle,
+  LuUser,
+  LuChevronLeft,
+} from "react-icons/lu";
+import { usePathname, useRouter } from "next/navigation";
+import { useFavorites, useAddFavorite, useRemoveFavorite } from "@/lib/store";
 
 export function Header() {
   return (
@@ -71,9 +78,58 @@ export function NavBar() {
 
 function NotificationBell() {
   return (
-    <div className="relative cursor-pointer">
-      <IoMdNotificationsOutline size={24} className="stroke-2" />
+    <div className="relative cursor-pointer group">
+      <IoMdNotificationsOutline
+        size={24}
+        className="stroke-2 group-hover:text-inactive transition-all duration-150"
+      />
       <div className="aspect-square absolute top-0.5 right-1 w-1.5 outline-2 outline-white bg-accent rounded-full" />
     </div>
+  );
+}
+
+export function PetNavBar({ data }) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const favorites = useFavorites();
+
+  return (
+    <nav
+      className={`${
+        pathname !== "/" ? "p-6" : "p-4"
+      } flex justify-between items-center absolute top-0 right-0 left-0`}
+    >
+      {pathname !== "/" && (
+        <LuChevronLeft
+          size={32}
+          className="bg-white rounded-full p-1 cursor-pointer hover:scale-105 transition-all duration-75 z-10"
+          onClick={() => router.back()}
+        />
+      )}
+      <FavoriteButton
+        iconSize={pathname !== "/" ? 32 : 24}
+        data={data}
+        isFavorite={favorites.find((fav) => fav.id === data.id)}
+      />
+    </nav>
+  );
+}
+
+export function FavoriteButton({ iconSize, data, isFavorite }) {
+  const addFav = useAddFavorite();
+  const removeFav = useRemoveFavorite();
+
+  return (
+    <button
+      onClick={isFavorite ? () => removeFav(data.id) : () => addFav(data)}
+      className="ml-auto z-10"
+    >
+      <LuStar
+        size={iconSize}
+        className={`${
+          isFavorite ? "fill-white bg-accent" : "bg-fav"
+        } p-1 text-background rounded-full cursor-pointer hover:fill-white hover:bg-accent transition-all duration-150`}
+      />
+    </button>
   );
 }

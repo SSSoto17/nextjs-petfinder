@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${manrope.variable} antialiased`}>
         <Header />
-        {children}
+        <main className="no-scrollbar overflow-x-visible">{children}</main>
         <NavBar />
       </body>
     </html>

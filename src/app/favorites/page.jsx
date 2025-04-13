@@ -1,9 +1,10 @@
-import BrowsePets from "@/components/DataWrapper";
+import PetList from "@/components/PetList";
+import { getAnimals } from "@/lib/api";
 
-export default function Favorites() {
+export default async function Favorites() {
   return (
-    <main>
-      <BrowsePets />
-    </main>
+    <section className="relative">
+      <PetList />
+    </section>
   );
 }

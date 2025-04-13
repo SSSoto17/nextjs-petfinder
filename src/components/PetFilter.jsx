@@ -6,11 +6,8 @@ import iconAll from "@/assets/img/All.png";
 import iconCats from "@/assets/img/Cats.png";
 import iconDogs from "@/assets/img/Dogs.png";
 import { useFilter, useFilterActions } from "@/lib/store";
-import { usePathname } from "next/navigation";
 
 export default function PetFilter({ data }) {
-  const currentPage = usePathname();
-
   const activeFilter = useFilter();
   const { setFilter } = useFilterActions();
 
@@ -20,10 +17,8 @@ export default function PetFilter({ data }) {
     { label: data[1].name, icon: iconCats },
   ];
 
-  if (currentPage === "/favorites") return;
-
   return (
-    <ul className="flex gap-3 py-4 overflow-x-scroll">
+    <ul className="flex gap-3 py-4 sticky top-0 z-10 bg-navbar backdrop-blur-2xl">
       {filterList.map((type, id) => {
         return (
           <FilterTab
@@ -39,10 +34,10 @@ export default function PetFilter({ data }) {
 }
 
 function FilterTab({ label, icon, active, setFilter }) {
-  const style = `flex gap-2 items-center p-2 pr-6 rounded-full shrink-0 font-medium cursor-pointer ${
+  const style = `flex gap-2 items-center p-2 pr-6 rounded-full shrink-0 font-medium cursor-pointer drop-shadow-sm ${
     active
       ? "bg-accent text-background"
-      : "text-inactive border border-border hover:text-accent hover:border-accent transition-all duration-150"
+      : "bg-white text-inactive border border-border hover:text-accent hover:border-accent transition-all duration-150"
   }`;
   return (
     <li className={style} onClick={() => setFilter(label)}>

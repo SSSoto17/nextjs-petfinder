@@ -1,15 +1,14 @@
 "use client";
 
-import { useFavoriteActions, useFavorites, useFilter } from "@/lib/store";
-import { LuStar } from "react-icons/lu";
+import { useFavorites, useFilter } from "@/lib/store";
+import { FavoriteButton, PetNavBar } from "./Globals";
+
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 import placeholderImg from "@/assets/img/placeholder.png";
 
 export default function PetList({ data }) {
-  const activePage = usePathname();
   const activeFilter = useFilter();
   const favorites = useFavorites();
 
@@ -18,7 +17,7 @@ export default function PetList({ data }) {
       ? data
       : data.filter((pet) => pet.type === activeFilter);
 
-  const pets = activePage === "/favorites" ? favorites : filteredData;
+  const pets = !data ? favorites : filteredData;
 
   return (
     <ul className="grid grid-cols-2 gap-4 py-4">
@@ -30,12 +29,9 @@ export default function PetList({ data }) {
 }
 
 function PetCard({ id, name, age, breeds, photos, data }) {
-  const favorites = useFavorites();
-  const isFavorite = favorites.find((fav) => fav.id === id);
-  const { addToFavorites, removeFromFavorites } = useFavoriteActions();
-
   return (
-    <li className="grid grid-rows-[1fr,_auto] content-end min-h-36 relative bg-background drop-shadow-md rounded-2xl cursor-pointer overflow-clip transition-all duration-150 hover:drop-shadow-lg hover:scale-102">
+    <li className="grid grid-rows-[1fr,_auto] content-end min-h-36 bg-background drop-shadow-md rounded-2xl cursor-pointer overflow-clip transition-all duration-150 hover:drop-shadow-lg hover:scale-102">
+      <PetNavBar data={data} />
       <Image
         src={photos[0]?.medium || placeholderImg}
         width={300}
@@ -58,21 +54,6 @@ function PetCard({ id, name, age, breeds, photos, data }) {
         </header>
         <p>{breeds?.primary}</p>
       </article>
-      <button
-        onClick={
-          isFavorite
-            ? () => removeFromFavorites(id)
-            : () => addToFavorites(data)
-        }
-        className="absolute top-2 right-2"
-      >
-        <LuStar
-          size={24}
-          className={`${
-            isFavorite ? "fill-white bg-accent" : "bg-fav"
-          } p-1 text-background rounded-full cursor-pointer hover:fill-white hover:bg-accent transition-all duration-150`}
-        />
-      </button>
     </li>
   );
 }

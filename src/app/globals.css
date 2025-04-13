@@ -3,7 +3,7 @@
 :root {
   --clr-text-heading: #171717;
   --clr-text-body: #333333;
-  --clr-text-inactive: #acacac;
+  --clr-text-inactive: rgba(0, 0, 0, 0.4);
   --clr-border: #cacacd;
 
   --clr-surface-primary: #ffffff;
@@ -26,22 +26,37 @@
 body {
   background: var(--color-background);
   color: var(--color-foreground);
-  min-height: 100svh;
+  height: 100svh;
   display: grid;
   grid-template-columns: minmax(5svw, 1fr) minmax(0, 480px) minmax(5svw, 1fr);
   grid-template-rows: auto 1fr auto;
+  overflow-y: clip;
 
-  > main {
-    grid-column: 2;
-  }
-
-  > * {
+  > header,
+  > main,
+  > nav {
     grid-column: 1 / 4;
     display: grid;
     grid-template-columns: subgrid;
 
     > * {
       grid-column: 2;
+      overflow: visible;
     }
+  }
+  > main {
+    overflow-y: scroll;
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 }

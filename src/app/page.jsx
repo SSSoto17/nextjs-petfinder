@@ -1,9 +1,14 @@
-import BrowsePets from "@/components/DataWrapper";
+import { getAnimals, getAnimalTypes } from "@/lib/api";
+import PetFilter from "@/components/PetFilter";
+import PetList from "@/components/PetList";
 
-export default function Home() {
+export default async function Home() {
+  const filterData = await getAnimalTypes();
+  const petData = await getAnimals();
   return (
-    <main>
-      <BrowsePets />
-    </main>
+    <section className="relative">
+      <PetFilter data={filterData} />
+      <PetList data={petData} />
+    </section>
   );
 }
