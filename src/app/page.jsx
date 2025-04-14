@@ -5,8 +5,9 @@ import PetList from "@/components/PetList";
 export default async function Home() {
   const filterData = await getAnimalTypes();
   const petData = await getAnimals();
+
   return (
-    <section className="relative">
+    <section className="relative col-span-full! full-bleed">
       <PetFilter data={filterData} />
       <PetList data={petData} />
     </section>

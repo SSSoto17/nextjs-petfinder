@@ -9,7 +9,7 @@ export default async function SingleView({ params }) {
   const petData = await getSingleAnimal(id);
 
   return (
-    <section className="relative">
+    <section className="relative col-start-2">
       <PetNavBar data={petData} />
       <Image
         src={petData.photos[0]?.large || placeholderImg}

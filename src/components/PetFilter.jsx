@@ -18,18 +18,20 @@ export default function PetFilter({ data }) {
   ];
 
   return (
-    <ul className="flex gap-3 py-4 sticky top-0 z-10 bg-navbar backdrop-blur-2xl">
-      {filterList.map((type, id) => {
-        return (
-          <FilterTab
-            key={id}
-            {...type}
-            active={activeFilter === type.label}
-            setFilter={setFilter}
-          />
-        );
-      })}
-    </ul>
+    <header className="col-span-full! full-bleed sticky top-0 z-10 bg-navbar backdrop-blur-2xl">
+      <ul className="flex gap-3 py-4 ">
+        {filterList.map((type, id) => {
+          return (
+            <FilterTab
+              key={id}
+              {...type}
+              active={activeFilter === type.label}
+              setFilter={setFilter}
+            />
+          );
+        })}
+      </ul>
+    </header>
   );
 }
 

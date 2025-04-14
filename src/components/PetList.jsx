@@ -30,7 +30,7 @@ export default function PetList({ data }) {
     );
 
   return (
-    <ul className="grid grid-cols-2 gap-4 py-4">
+    <ul className="col-start-2 grid grid-cols-2 auto-rows-[1fr,_auto] gap-4 py-4">
       {pets.map((pet, id) => {
         return <PetCard key={id} {...pet} data={pet} />;
       })}
@@ -38,21 +38,30 @@ export default function PetList({ data }) {
   );
 }
 
-function PetCard({ id, name, age, breeds, photos, data }) {
+function PetCard({
+  id,
+  name,
+  age,
+  breeds,
+  photos,
+  primary_photo_cropped,
+  data,
+}) {
   return (
-    <li className="grid grid-rows-[1fr,_auto] content-end min-h-36 bg-background drop-shadow-md rounded-2xl cursor-pointer overflow-clip transition-all duration-150 hover:drop-shadow-lg hover:scale-102">
+    <li className="grid grid-rows-subgri row-span-2 gap-0 bg-background drop-shadow-md rounded-2xl cursor-pointer overflow-clip transition-all duration-150 hover:drop-shadow-lg hover:scale-102">
       <PetNavBar data={data} />
       <Image
-        src={photos[0]?.medium || placeholderImg}
+        src={primary_photo_cropped?.medium || placeholderImg}
+        // src={photos[0]?.medium || placeholderImg}
         width={300}
         height={300}
         alt={name}
         className="rounded-2xl h-36 object-cover"
       />
 
-      <article className="px-3  py-4 text-inactive">
-        <header className="flex justify-between items-end gap-2">
-          <h2 className="text-foreground font-bold">
+      <article className="px-3 py-4 text-inactive">
+        <header className="flex justify-between items-center gap-2">
+          <h2 className="text-foreground font-bold truncate">
             <Link
               href={`/single/${id}`}
               className="after:absolute after:inset-0"
