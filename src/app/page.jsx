@@ -7,7 +7,7 @@ export default async function Home() {
   const petData = await getAnimals();
 
   return (
-    <section className="relative col-span-full! full-bleed">
+    <section className="relative col-span-full! full-bleed content-start">
       <PetFilter data={filterData} />
       <PetList data={petData} />
     </section>
